@@ -1,0 +1,8 @@
+:HL["/historia-polski/_next/static/chunks/10d8217891127dd9.css","style"]
+:HL["/historia-polski/_next/static/media/037b6aa687f94b32-s.p.82297bd5.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/historia-polski/_next/static/media/1bffadaabf893a1e-s.p.7cd81963.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/historia-polski/_next/static/media/2a65768255d6b625-s.p.d19752fb.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/historia-polski/_next/static/media/83afe278b6a6bb3c-s.p.3a6ba036.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/historia-polski/_next/static/media/9a800f173b8d9e8f-s.p.ea25be69.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/historia-polski/_next/static/media/b49b0d9b851e4899-s.p.4f3fa681.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+0:{"buildId":"9vBMyNIS35Zolg5dpekJw","tree":{"name":"","paramType":null,"paramKey":"","hasRuntimePrefetch":false,"slots":{"children":{"name":"__PAGE__","paramType":null,"paramKey":"__PAGE__","hasRuntimePrefetch":false,"slots":null,"isRootLayout":false}},"isRootLayout":true},"staleTime":300}
