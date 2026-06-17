@@ -28,7 +28,7 @@ function withSecurityHeaders(res, contentType = "application/json; charset=utf-8
       "img-src 'self' https: data:",
       "style-src 'self' 'unsafe-inline'",
       "script-src 'self' https://app.mumro.io",
-      "frame-src https://www.youtube.com https://player.vimeo.com https://www.facebook.com https://www.tiktok.com https://www.dailymotion.com",
+      "frame-src https://www.youtube.com https://player.vimeo.com https://www.instagram.com https://www.facebook.com https://www.tiktok.com https://www.dailymotion.com",
       "connect-src 'self'",
       "object-src 'none'",
     ].join("; "),
@@ -525,6 +525,7 @@ function pageShell({ title, description, canonicalUrl, body, extraHead = "", ogT
       .content .film-link { width: 100%; justify-content: center; border-radius: 16px; }
     }
   </style>
+  <link rel="stylesheet" href="/assets/site-polish.css">
   ${extraHead}
 </head>
 <body>
