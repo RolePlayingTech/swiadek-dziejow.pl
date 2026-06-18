@@ -8,3 +8,7 @@ node_modules/
 *.mov
 *.m4v
 *.webm
+
+# Local-only: editor settings and backup of the previous Next.js homepage export.
+.vscode/
+.backup/

@@ -17,7 +17,7 @@
       "#artykuly-historyczne-home .article-card{display:block;min-height:210px;padding:1.35rem;border:1px solid rgba(212,160,84,.22);border-radius:1.125rem;background:linear-gradient(145deg,rgba(255,255,255,.06),rgba(0,0,0,.2)),radial-gradient(circle at 16% 0%,rgba(212,160,84,.09),transparent 14rem);text-decoration:none;transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease}",
       "#artykuly-historyczne-home .article-card:hover{transform:translateY(-4px);border-color:rgba(212,160,84,.5)}",
       "#artykuly-historyczne-home .article-date{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--color-fg-dim);margin-bottom:.85rem;font-family:var(--font-display)}",
-      "#artykuly-historyczne-home .article-title{font-size:1.15rem;line-height:1.22;color:var(--color-fg);font-weight:700;margin:0 0:.75rem;font-family:var(--font-display)}",
+      "#artykuly-historyczne-home .article-title{font-size:1.15rem;line-height:1.22;color:var(--color-fg);font-weight:700;margin:0 0 .75rem;font-family:var(--font-display)}",
       "#artykuly-historyczne-home .article-excerpt{font-size:.85rem;line-height:1.65;color:var(--color-fg-muted);margin:0;font-family:var(--font-body)}",
       "#artykuly-historyczne-home .articles-empty{border:1px dashed rgba(212,160,84,.25);border-radius:1.25rem;padding:1.5rem;color:var(--color-fg-muted);background:rgba(255,255,255,.03);font-size:.9rem}",
       "@media (min-width:768px){#artykuly-historyczne-home{padding:7rem 1.25rem 8rem}}",
