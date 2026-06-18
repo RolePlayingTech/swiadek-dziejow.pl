@@ -92,6 +92,22 @@ function stripTags(value) {
     .trim();
 }
 
+// First <img src> in the article body, used as the social/link-preview image
+// (og:image) when the article metadata does not set one explicitly.
+function firstImageSrc(html) {
+  const match = String(html || "").match(/<img\b[^>]*\bsrc\s*=\s*(["'])([\s\S]*?)\1/i);
+  const src = match ? match[2].trim() : "";
+  return /^https?:\/\//i.test(src) ? src : "";
+}
+
+function absoluteUrl(url) {
+  const value = String(url || "").trim();
+  if (!value) return "";
+  if (/^https?:\/\//i.test(value)) return value;
+  if (value.startsWith("/")) return `${BASE_URL}${value}`;
+  return `${BASE_URL}/${value}`;
+}
+
 function extractYouTubeId(url) {
   const match = String(url || "").match(
     /(?:youtube\.com\/(?:watch\?(?:[^"'\s]*&)?v=|embed\/|v\/|shorts\/)|youtu\.be\/)([A-Za-z0-9_-]{11})/i,
@@ -441,6 +457,7 @@ function renderTags(article) {
 }
 
 function articleJsonLd(article) {
+  const ogImage = absoluteUrl(article.metadata?.og_image || firstImageSrc(article.content_html));
   const data = {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -457,6 +474,9 @@ function articleJsonLd(article) {
     mainEntityOfPage: { "@type": "WebPage", "@id": articleUrl(article) },
     inLanguage: "pl-PL",
   };
+  if (ogImage) {
+    data.image = [ogImage];
+  }
   // Escape '<' to keep the JSON-LD safe inside a <script> block.
   return `<script type="application/ld+json">${JSON.stringify(data).replace(/</g, "\\u003c")}</script>`;
 }
@@ -503,9 +523,13 @@ const SITE_LOGO = `<a class="brand" href="/" aria-label="Świadek Dziejów — s
   <span class="brand-name">Świadek Dziejów</span>
 </a>`;
 
-function pageShell({ title, description, canonicalUrl, body, extraHead = "", ogType = "article", bodyClass = "" }) {
+function pageShell({ title, description, canonicalUrl, body, extraHead = "", ogType = "article", bodyClass = "", ogImage = "" }) {
   const pageTitle = title ? `${title} · Świadek Dziejów` : "Artykuły · Świadek Dziejów";
   const metaDescription = description || "Artykuły historyczne Świadka Dziejów.";
+  const ogImageUrl = absoluteUrl(ogImage);
+  const ogImageTags = ogImageUrl
+    ? `\n  <meta property="og:image" content="${escapeAttr(ogImageUrl)}">\n  <meta name="twitter:image" content="${escapeAttr(ogImageUrl)}">`
+    : "";
 
   return `<!doctype html>
 <html lang="pl">
@@ -520,7 +544,7 @@ function pageShell({ title, description, canonicalUrl, body, extraHead = "", ogT
   <meta property="og:type" content="${escapeAttr(ogType)}">
   <meta property="og:site_name" content="Świadek Dziejów">
   <meta property="og:url" content="${escapeAttr(canonicalUrl)}">
-  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:card" content="summary_large_image">${ogImageTags}
   <link rel="canonical" href="${escapeAttr(canonicalUrl)}">
   <link rel="alternate" type="application/rss+xml" title="Świadek Dziejów — artykuły" href="${BASE_URL}${ARTICLES_PATH}/feed.xml">
   <link rel="icon" href="/favicon.ico" sizes="any">
@@ -528,6 +552,7 @@ function pageShell({ title, description, canonicalUrl, body, extraHead = "", ogT
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap">
   <style>${PAGE_STYLES}</style>
+  <script async src="https://app.mumro.io/api/website-analytics/script.js?p=wa_DRu7oiXMoXiW117JsnANN4fb"></script>
   ${extraHead}
 </head>
 <body class="${escapeAttr(bodyClass)}">
@@ -640,6 +665,7 @@ function renderArticle(article, articles) {
     description: article.excerpt || stripTags(article.content_html).slice(0, 180),
     canonicalUrl: articleUrl(article),
     bodyClass: "page-article",
+    ogImage: article.metadata?.og_image || firstImageSrc(article.content_html),
     extraHead: articleJsonLd(article),
     body: `<article class="article">
   <header class="wrap article-head">
